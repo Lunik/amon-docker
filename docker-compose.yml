@@ -1,0 +1,20 @@
+version: '2'
+services:
+  amon:
+    build: "./image"
+    ports:
+      - "80:80"
+    depends_on:
+      - mongo
+    environment:
+      - MONGO_URI=mongodb://mongo:27017
+      - AMON_PROTO=http
+      - AMON_HOSTNAME=mondomain.exemple
+    volumes:
+      - "./amon:/etc/opt/amon/"
+
+  mongo:
+    image: "mongo:latest"
+    command: --smallfiles
+    volumes:
+      - ./db:/data/db
