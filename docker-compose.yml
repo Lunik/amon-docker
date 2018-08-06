@@ -4,6 +4,7 @@ services:
     build: "./image"
     ports:
       - "80:80"
+      - "443:443"
     depends_on:
       - mongo
     environment:
@@ -12,6 +13,7 @@ services:
       - AMON_HOSTNAME=mondomain.exemple
     volumes:
       - "./amon:/etc/opt/amon/"
+      - "./log:/var/log/amon/"
 
   mongo:
     image: "mongo:latest"
